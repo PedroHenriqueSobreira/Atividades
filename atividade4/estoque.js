@@ -14,8 +14,6 @@ function adicionar(item){
         item_valido = false;
     }
 
-
-
     if(item_valido){
         item.push(item);
     }
@@ -37,19 +35,35 @@ function editar(id, qtd){
     }
 
     if(item_valido){
-    itens.forEach(item_cadastrado => {
-        if(item_cadastrado.id == id){
-            item_cadastrado.qtd = qtd
-        }
-    });
+        itens.forEach(item_cadastrado => {
+            if(item_cadastrado.id == id){
+                item_cadastrado.qtd = qtd
+            }
+        });
+    }
+    return item_valido;
 }
+
+function remover(id){
+    item_valido = true;
+    if(
+        !is_numerico(id) ||
+        !is_id_cadastrado(id)
+    ){
+        item_valido = false;
+    }
+
+    if(item_valido){
+        itens = itens.filter(item_cadastrado => item_cadastrado.id != id);
+    }
     return item_valido;
 }
 
 module.exports ={
     adicionar,
     listar,
-    editar
+    editar,
+    remover
 };
 
 function is_id_cadastrado(){
